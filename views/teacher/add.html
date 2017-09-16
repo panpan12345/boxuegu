@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <?php include "/views/public/css.html" ?>
+    <link rel="stylesheet" href="/views/assets/bootstrap-datepicker/css/bootstrap-datepicker3.css">
+</head>
+
+<body>
+
+    <!-- 侧边栏 -->
+    <?php include "/views/public/aside.html" ?>
+
+    <!-- 主体 -->
+    <div class="main">
+        <div class="container-fluid">
+            <!-- 头部 -->
+            <?php include "/views/public/header.html" ?>
+
+            <div class="body teacher">
+                <!-- 挖个坑 -->
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="teacher_add_edit_tpl">
+        <!-- 面包屑 -->
+        <ol class="breadcrumb">
+            <li><a href="javascript:;">讲师管理</a></li>
+            <li class="active">{{title}}</li>
+        </ol>
+        <div class="teacher-add">
+            <form action="{{url}}" method="post" class="form-horizontal col-xs-offset-2">
+                <input type="hidden" name="tc_id" value="{{tc_id}}">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">姓名</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="tc_name" value="{{tc_name}}" class="form-control input-sm" data-required data-trim placeholder="讲师名称" data-description="name" data-describedby="msgforname">
+                    </div>
+                    <span id="msgforname" class="col-xs-5 help-block"></span>
+                </div>
+                <!-- 只有添加操作，才需要密码框 -->
+                <!-- 所以我们可以通过判断传进模板中的额数是否有tc_id来区分是编辑还是添加 -->
+                {{if !tc_id}}
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">密码</label>
+                    <div class="col-xs-4">
+                        <input type="password" name="tc_pass" data-required data-pattern="^[a-zA-Z0-9]{6,15}$" class="form-control input-sm" data-description="password" data-describedby="msgforpass">
+                    </div>
+                    <span id="msgforpass" class="col-xs-5 help-block"></span>
+                </div>
+                {{/if}}
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">入职时间</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="tc_join_date" value="{{tc_join_date}}" data-required class="form-control input-sm" data-description="date" data-describedby="msgfordate">
+                    </div>
+                    <span id="msgfordate" class="col-xs-5 help-block"></span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">类型</label>
+                    <div class="col-xs-2">
+                        <select name="tc_type" class="form-control input-sm">
+                            <option value="1" {{tc_type=="1" ? "selected": ""}}>讲师</option>
+                            <option value="0" {{tc_type=="0" ? "selected": ""}}>管理员</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">性别</label>
+                    <div class="col-xs-4">
+                        <label class="radio-inline">
+                                <input type="radio" name="tc_gender" value="0" {{tc_gender=="0" ? "checked": ""}}> 男
+                            </label>
+                        <label class="radio-inline">
+                                <input type="radio" name="tc_gender" value="1" {{tc_gender=="1" ? "checked": ""}}> 女
+                            </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-7">
+                        <button id="save-btn" class="btn btn-success btn-sm pull-right">{{btnText}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </script>
+
+    <?php include "/views/public/js.html" ?>
+    <script>
+        //baseUrl: /views/assets
+        require(["../static/js/teacher/betteradd"])
+    </script>
+
+</body>
+
+</html>
