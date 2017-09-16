@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<button>点击我发送JQ的ajax请求</button>
+<script type="text/javascript" src="jquery-1.12.4.js"></script>
+<script type="text/javascript">
+  $(function(){
+    $("button").click(function(){
+      $.ajax({
+        type:"post",
+        url:"demo.php",
+        data:{
+          username:"飞飞",
+          age:"18"
+        },
+        beforeSend:function(){
+          alert("我要开始发送AJAX了");
+        },
+        success:function(data){
+          console.log(data);
+        },
+        error:function(xhr){
+          console.log(xhr)
+        },
+        complete:function(){
+          console.log("结束了");
+        }
+      })
+    })
+  })
+</script>
+  
+</body>
+</html>

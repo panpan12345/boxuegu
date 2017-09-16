@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./uploadify/uploadify.css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./uploadify/jquery.uploadify.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" name="touxiang" id="touxiang">
+
+    <script>
+        $("#touxiang").uploadify({
+            //swf文件的路径
+            swf: "./uploadify/uploadify.swf",
+            //通过uploader可以指定要将文件上传到的服务器的地址
+            uploader: "./uploadify/uploadify.php",
+            //!!!! 非常重要  fileObjName 用来指定文件数据上传的时候的键
+            fileObjName: "avatarpic",
+
+
+
+            buttonClass: "red",
+            buttonText: "请选择文件",
+            fileSizeLimit: "100KB",
+            fileTypeDesc: "图片文件",
+            fileTypeExts: '*.gif; *.jpg; *.png',
+            formData: {name: "zs", age: 18},
+            width: 400,
+            height: 400,
+            onUploadSuccess: function(){
+                
+            }
+        });
+
+
+        $.ajax({
+            data: {
+                name: "zs"
+            }
+        })
+    </script>
+</body>
+</html>

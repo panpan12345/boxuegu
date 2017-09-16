@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX全局练习</title>
+</head>
+<body>
+   <script src="node_modules/jquery/dist/jquery.js"></script>
+
+   <script>
+// ajaxStart和ajaxStop这两个事件会在一个批次的请求时间被各触发一次。
+      $(document).ajaxStart(function(){
+        alert("ajaxStart被调用啦");
+      })
+
+       $(document).ajaxSend(function(){
+              alert("ajaxSend被调用啦");
+            })
+
+       $(document).ajaxSuccess(function(){
+              alert("ajaxSuccess被调用啦");
+            })
+
+
+       $(document).ajaxError(function(){
+              alert("ajaxError被调用啦");
+            })
+
+       $(document).ajaxComplete(function(){
+              alert("ajaxComplete被调用啦");
+            })
+        $(document).ajaxStop(function(){
+              alert("ajaxStop被调用啦");
+            })
+       
+
+        setTimeout(function(){
+
+           $.ajax({
+            url:"package.json"
+        })
+
+        },500)
+
+
+   </script>
+</body>
+</html>

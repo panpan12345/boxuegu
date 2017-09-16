@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我们都是好孩子</title>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="jquery-validate.js"></script>
+</head>
+<body>
+  
+  <form action="">
+    
+    用户名：<input type="text">
+    密  码：<input type="text">
+    电话号码：<input type="text">
+    姓  名：<input type="text">
+
+    <button>注册</button>
+
+  </form>
+
+  <script>
+
+    // data-required 必填
+    // data-trim 去掉空格后校验。
+    // data-patter 使用正则表达式对表单进行校验
+    // data-conditional 在表单进行验证的时候，加了这个属性的表单元素，会调用使用这个data-contional指定的一个函数，当函数返回值为true的时候，就是验证通过啦，否则就是不通过 （data-conditional指定的函数，存放在给validata传递的参数对象中的condition对象中！）
+    // onSubmit 用来设置是否要在表单被提交的时候，进行表单验证，默认值true
+    // onBlur用来设置 是否要在表单元素失去焦点的时候，进行表单验证，默认值是false
+    // onChange用来设置 是否要在表单元素市区焦点的时候，进行表单验证，默认值是false
+    // onkeyUp 用来设置 是否要在表单元素中按键的时候尽心表单验证，默认值是false
+    // sendForm 这个东西，用来设置是否要在表单验证通过之后自动提交表单。
+    // 
+    // 回调函数（事件）
+    // valid 当进行表单校验的时候，整个表单全部通过全部校验，就会触发这个函数。
+    // invalid:当进行表单校验的时候，整个表单不通过校验，就会触发这个函数。
+    // eachField:当进行表单校验的时候，每有一次表单项被校验，就会触发这个函数。
+    // eachValidField:当进行表单校验的时候，每当有一个表单项被校验并且通过校验，这个函数就会被调用。
+    // 
+    $("form").validate({
+
+      conditional:{
+
+        isMeinv:function(value){
+          return value == "haha"
+        }
+
+      }
+    })
+
+
+  </script>
+  
+</body>
+</html>

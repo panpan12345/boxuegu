@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    table{
+      border: 1px solid #000;
+      width: 800px;
+      margin: 100px auto;
+    }
+    td{
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+
+  </style>
+</head>
+<body>
+
+  出发站：<input type="text" class="start" value="上海">
+  到达站：<input type="text" class="end" value="北京">
+  <button>点击查询</button>
+  <table>
+    <thead>
+      <tr>
+        <td>车次</td>
+        <td>类型</td>
+        <td>出发站</td>
+        <td>到达站</td>
+        <td>出发时间</td>
+        <td>到达时间</td>
+        <td>用时</td>
+        <td>票价</td>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>  
+  </table>
+  <script type="text/template" id = "tpl">
+
+{{ each result  }}
+      <tr>
+        <td>{{ $value.trainno }}</td>
+        <td>{{ $value.type }}</td>
+        <td>{{ $value.station }}</td>
+        <td>{{ $value.endstation }}</td>
+        <td>{{ $value.departuretime }}</td>
+        <td>{{ $value.arrivaltime }}</td>
+        <td>{{ $value.costtime }}</td>
+        <td>{{ '商务座票价:' + $value.pricesw }}<br/>
+          {{'软卧上票价：' + $value.pricerw1 }}<br/>
+          {{'软卧下票价：' + $value.pricerw2 }}</td>
+      </tr>
+    {{ /each }}
+
+
+  </script>
+  <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="art-template.js"></script>
+  <script>
+
+    $(function(){
+      var btn = $("button");
+      var start = $(".start");
+      var end  = $(".end");
+      btn.on("click",function(){
+          var startVal = start.val();
+          var endVal = end.val();
+
+          $.ajax({
+            url:"http://api.jisuapi.com/train/station2s",
+            type:"get",
+            dataType:"JSONP",
+            data:{
+              start:startVal,
+              end:endVal,
+              appkey:"351c67f092934bc0"
+            },
+            success:function(data){
+              $("tbody").html(template("tpl",data))
+            }
+          })
+
+
+
+      })
+    })
+
+
+
+  </script>
+  
+</body>
+</html>

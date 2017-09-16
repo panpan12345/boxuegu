@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化练习</title>
+</head>
+<body>
+    <script src="require.js"></script>
+    <script>
+      // 模块化是什么？
+      // 将代码按照不同的功能，进行模块化的划分！划分之后，便于代码的管理，让代码结构更加清晰，还能够方便实现代码复用。
+      // 之前我们将不同功能的js代码存放到不同的Js文件中，其实就是在利用模块化的思想对代码进行管理。
+      // 模块化标准：
+      // 1，CommonJS：这个模块标准，不适用于前端开发，Nodejs使用的就是此类标准。
+      // 2，AMD :异步模块定义，依赖前置  require.js;
+      // CDM 通用模块定义， 依赖延迟  sea.js
+       
+
+       // require.js 的基本介绍
+       // 是一个遵循AMD标准的用来实现前端模块化的工具，就是一个js文件
+       // 如何定义模块化：通过require.js提供一个方法：define  我们就可以创建一个模块出来。
+       // require(["./b"]);//z我理解的类似于引用
+       // // function中要传参数
+       //  require(["./a"],function(test){
+       //      test.test();
+       //      test.test1();
+       //  });
+
+       //  require(["./c"], function( obj){
+       //      //当模块加载完毕之后，会来调用这个函数中的代码
+       //      console.log(obj);
+       //  });
+
+
+        // 汇总以上三个的
+        //  //通过形参来接收这个模块的返回值
+        // 双引号里不能有空格。有返回值的写前面。没有返回值的写后面
+        // require(["./a", "./c" , "./b"], function(test, obj){
+        //   test.test();
+        //   test.test1();
+        //   console.log(obj);
+        // })
+
+
+
+   // 引入jquery
+    
+// require(["./jquery"],function($){
+//   console.log($);
+// });
+
+
+
+// 稍微复杂一点的
+// require.config({
+//   baseUrl:"/di5tianlianxi",
+//   paths: {
+//    tools: "./a/b/c/d/tools"
+//   }
+// })
+// require(["tools"]);
+//  require.config({
+//             //baseUrl可以用来设置所有的模块的查找的基础路径
+//             //这个路径一般使用绝对路径来书写！
+//             baseUrl: "/di5tianlianxi",
+//             //paths 可以用来为每一个模块设置一个别名
+//             //别名，就可以用来代表一个路径
+//             //在使用模块的时候，只需要使用该模块路径的别名即可，不需要再写那么长的地址了
+//             paths: {
+                
+//                 tools: "./a/b/c/d/tools",
+//             }
+//         })
+
+//         require(["tools"]);
+
+// // 这个要在服务器里打开才行！！！
+// 
+// 
+// 
+// 引入一个第三方库不支持的模块化
+
+require.config({
+
+  baseUrl:"/",
+
+  paths:{
+
+    animate:"./animate",
+
+    bigger:"./jquery.bigger",
+
+    jquery:"./jquery"
+  },
+
+  shim:{
+
+    animate:{
+
+      exports:"obj"
+    },
+    bigger:{
+
+      deps:{
+        deps:["jquery"]
+      }
+    }
+  }
+
+
+})
+
+
+
+
+  </script>
+</body>
+</html>

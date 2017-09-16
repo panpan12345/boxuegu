@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我们都是好孩子</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap3.css">
+</head>
+<body>
+  请输入日期：<input type="text" id="date">
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+
+  <script src="node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+  <script src="node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <script>
+
+    $("#date").datepicker({
+
+      autoclose:true,
+      format:"yyy-mm-dd",
+      startDate:"+3",
+      startDate:"-3",
+      language:"zh-CN"
+    })
+
+  </script>
+</body>
+</html>

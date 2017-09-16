@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jsonp封装练习</title>
+</head>
+<body>
+   <script>
+ 
+      function jsonp(url,params,callback){
+
+        var script = document.createElement("script");
+
+        var cbName = "jsonp" + parseInt(Math.random()*10000000000 +100000000)+(+new Date());
+
+        window[cbName] = function(data){
+          callback(data);
+
+          document.head.removeChild(script);
+
+          delete window[cbName];
+        };
+
+        var paramsStr = "";
+
+        for(var k in params){
+
+          paramsStr += k + "=" + params[k] + "&";
+        }
+
+        url = url + "?" + paramsStr;
+
+        url = url + "callback" + cbName;
+
+        script.src = url;
+
+        document.head.appendChild(script);
+      }
+    
+    jsonp ("http://api.douban.com/v2/book/search",{q:"解忧杂货店",a:123},function(data){console.log(data); console.log("第一次")});
+
+
+jsonp ("http://api.douban.com/v2/book/search",{q:"解忧杂货店",a:123},function(data){console.log(data); console.log("第二次")});
+
+jsonp ("http://api.douban.com/v2/book/search",{q:"解忧杂货店",a:123},function(data){console.log(data); console.log("第三次")});
+
+jsonp ("http://api.douban.com/v2/book/search",{q:"解忧杂货店",a:123},function(data){console.log(data); console.log("第四次")});
+
+
+
+
+
+
+
+
+   </script>
+</body>
+</html>

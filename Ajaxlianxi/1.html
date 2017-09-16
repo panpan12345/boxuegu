@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      table {
+      border:1px solid #ccc;
+    }
+    td {
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+
+  </style>
+</head>
+<body>
+<button>点击我请求XML数据</button>
+  
+  <table>
+    <thead>
+      <th>讲师姓名</th>
+      <th>讲师年纪</th>
+      <th>讲师爱好</th>
+      <th>讲师身高</th>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+<script type = "text/javascript">
+  var btn = document.querySelector('button');
+  var tbody = document.querySelector('tbody');
+  btn.onclick = function(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("get","demo.php");
+    xhr.send(null);
+        console.log(xhr);
+
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4 && xhr.status ==200){
+        var data = xhr.responseXML;//这个是传递出的数据
+        console.log(data);
+       
+        var teachers = data.querySelectorAll("teacher");
+         console.log(teachers);//这个teacher是传递的数据
+        for(var i=0;i<teachers.length; i++){
+          var tr = document.createElement("tr");
+            console.log(tr);
+
+          var items = teachers[i].children;
+          for (var j = 0; j < items.length; j++) {
+            var td = document.createElement("td");
+            td.innerHTML = items[j].innerHTML;
+
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+      }
+    }
+
+  }
+
+
+</script> 
+</body>
+</html>
